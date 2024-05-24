@@ -1,31 +1,17 @@
-// -> API
-import { api } from "@/services/httpClient";
+// -> Services
+import BrandServices from "@/services/BrandServices";
 
 // -> Components
 import { Form } from "@/components/Form";
 
-// -> Types
-import { BrandDTO } from "@/dtos/BrandDTO";
-
-// -> Styles
-import styles from "../styles/home.module.css";
-
-async function getAllBrands() {
-  const { data } = await api.get<BrandDTO[]>("/carros/marcas");
-  return data.map((brand) => {
-    return {
-      label: brand.nome,
-      code: brand.codigo,
-    };
-  });
-}
+import styles from '../styles/home.module.css';
 
 export default async function Home() {
-  const listBrands = await getAllBrands();
-
+  const listBrands = await BrandServices.getAllBrands();
+  
   return (
     <div className={styles.main}>
       <Form options={listBrands} />
     </div>
-  );
+  ) 
 }

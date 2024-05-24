@@ -10,5 +10,5 @@ export const FormContainer = styled.div`
   margin: 0 auto;
   background-color: white;
   backdrop-filter: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
-  overflow: auto;
+  gap: 1.5rem;
 `;

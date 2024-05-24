@@ -1,5 +1,11 @@
 "use client";
+
+// -> Controller
+import { useFormController } from "./useFormController";
+
+// -> Components
 import AutoComplete from "../AutoComplete";
+
 // -> Styles
 import { FormContainer } from "./styles";
 
@@ -9,9 +15,27 @@ interface IFormProps {
 }
 
 export function Form({ options }: IFormProps) {
+  const {
+    models,
+    disableAutocompleteModel,
+    handleChangeSelectedBrand,
+    handleChangeSelectedModel,
+  } = useFormController()
+
   return (
     <FormContainer>
-      <AutoComplete label="Marca" options={options} />
+      <AutoComplete 
+        label="Marca" 
+        options={options} 
+        onChangeValue={handleChangeSelectedBrand} 
+      />
+
+      <AutoComplete 
+        label="Modelo"
+        options={models} 
+        isDisabled={disableAutocompleteModel} 
+        onChangeValue={handleChangeSelectedModel} 
+      />
     </FormContainer>
   );
 }
