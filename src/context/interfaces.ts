@@ -1,5 +1,3 @@
-import { BrandDTO } from "@/dtos/BrandDTO";
-
 export interface IModelsProps {
   label: string;
   code: string;

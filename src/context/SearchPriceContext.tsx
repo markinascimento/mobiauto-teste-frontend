@@ -4,7 +4,7 @@
 import { ReactNode, createContext, useCallback, useState } from "react";
 
 // -> Types
-import { ISearchPriceContextProps } from "./interfaces";
+import { ISearchPriceContextProps, IModelsProps } from "./interfaces";
 import { BrandDTO } from "@/dtos/BrandDTO";
 
 export const SearchPriceContext = createContext({} as ISearchPriceContextProps);
@@ -14,7 +14,7 @@ export function SearchPriceProvider({ children }: { children: ReactNode }) {
   const [selectedModel, setSelectedModel] = useState<string>('');
   const [selectedYear, setSelectedYear] = useState<string>('');
 
-  const [models, setModels] = useState<BrandDTO[]>([]);
+  const [models, setModels] = useState<IModelsProps[]>([]);
 
   return (
     <SearchPriceContext.Provider 
