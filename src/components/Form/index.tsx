@@ -17,9 +17,11 @@ interface IFormProps {
 export function Form({ options }: IFormProps) {
   const {
     models,
+    yearByModel,
     disableAutocompleteModel,
     handleChangeSelectedBrand,
     handleChangeSelectedModel,
+    handleChangeSelectedYear,
   } = useFormController()
 
   return (
@@ -36,6 +38,14 @@ export function Form({ options }: IFormProps) {
         isDisabled={disableAutocompleteModel} 
         onChangeValue={handleChangeSelectedModel} 
       />
+
+      {yearByModel.length > 0 && (
+        <AutoComplete 
+          label="Ano"
+          options={yearByModel} 
+          onChangeValue={handleChangeSelectedYear} 
+        />
+      )}
     </FormContainer>
   );
 }

@@ -1,11 +1,8 @@
-export interface IModelsProps {
-  label: string;
-  code: string;
-}
-
 export interface ISearchPriceContextProps {
-  models: IModelsProps[];
   selectedBrand: string;
-  setModels(brands: IModelsProps[]): void;
-  setSelectedBrand(value: string): void;
+  selectedModel: string;
+  selectedYear: string;
+  setSelectedBrand(brand: string): void;
+  setSelectedModel(model: string): void;
+  setSelectedYear(year: string): void;
 }

@@ -23,6 +23,18 @@ class BrandServices {
       };
     });
   }
+
+  async getAllYears(brand: string, year: string) {
+    const { data } = await api.get<BrandDTO[]>(`/carros/marcas/${brand}/modelos/${year}/anos`);
+    return data.map((brand) => {
+      return {
+        label: brand.nome,
+        code: brand.codigo,
+      };
+    });
+  }
 }
 
 export default new BrandServices();
+
+// https://parallelum.com.br/fipe/api/v1/carros/marcas/23/modelos/937/anos
