@@ -21,14 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={roboto.className}>
-        <StyledComponentsRegistry>
+      <StyledComponentsRegistry>
+        <body className={roboto.className}>
           <SearchPriceProvider>
             <GlobalStyles />
             {children}
           </SearchPriceProvider>
-        </StyledComponentsRegistry>
-      </body>
+        </body>
+      </StyledComponentsRegistry>
     </html>
   );
 }

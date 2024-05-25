@@ -4,7 +4,8 @@
 import { useFormController } from "./useFormController";
 
 // -> Components
-import AutoComplete from "../AutoComplete";
+import { Button } from "../Button";
+import { Select } from "../Select";
 
 // -> Styles
 import { FormContainer } from "./styles";
@@ -18,34 +19,48 @@ export function Form({ options }: IFormProps) {
   const {
     models,
     yearByModel,
+    selectedYear,
+    selectedModel,
+    selectedBrand,
+    disableButton,
     disableAutocompleteModel,
+    handleNavigationResult,
     handleChangeSelectedBrand,
     handleChangeSelectedModel,
     handleChangeSelectedYear,
-  } = useFormController()
+  } = useFormController();
 
   return (
     <FormContainer>
-      <AutoComplete 
-        label="Marca" 
-        options={options} 
-        onChangeValue={handleChangeSelectedBrand} 
+      <Select
+        label="Marca"
+        options={options}
+        value={selectedBrand}
+        onChangeValue={handleChangeSelectedBrand}
       />
 
-      <AutoComplete 
+      <Select
         label="Modelo"
-        options={models} 
-        isDisabled={disableAutocompleteModel} 
-        onChangeValue={handleChangeSelectedModel} 
+        options={models}
+        value={selectedModel}
+        isDisabled={disableAutocompleteModel}
+        onChangeValue={handleChangeSelectedModel}
       />
 
       {yearByModel.length > 0 && (
-        <AutoComplete 
+        <Select
           label="Ano"
-          options={yearByModel} 
-          onChangeValue={handleChangeSelectedYear} 
+          value={selectedYear}
+          options={yearByModel}
+          onChangeValue={handleChangeSelectedYear}
         />
       )}
+
+      <Button
+        label="Consultar preço"
+        onClick={handleNavigationResult}
+        disabled={disableButton}
+      />
     </FormContainer>
   );
 }

@@ -1,22 +1,17 @@
-'use client'
+"use client";
 // -> NextJS
-import { redirect } from "next/navigation"
 
 // -> Custom hooks
-import { useSearchPrice } from "@/hooks/useSearchPrice"
+import { useSearchPrice } from "@/hooks/useSearchPrice";
 
 export default function Result() {
-  const {
-    selectedBrand, selectedModel, selectedYear
-  } = useSearchPrice()
+  const { selectedBrand, selectedModel, selectedYear } = useSearchPrice();
 
-  if(!selectedBrand || !selectedModel || !selectedYear) {
-    return redirect('/')
-  }
+  console.log({ selectedBrand, selectedModel, selectedYear });
 
   return (
     <div>
       <span> página de resultado </span>
     </div>
-  )
+  );
 }

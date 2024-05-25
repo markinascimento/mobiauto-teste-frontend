@@ -1,6 +1,9 @@
 // -> ReactJS
 import { useCallback, useState } from "react";
 
+// -> NextJS
+import { useRouter } from "next/navigation";
+
 // -> Custom hooks
 import { useSearchPrice } from "@/hooks/useSearchPrice";
 
@@ -14,8 +17,12 @@ interface IProps {
 }
 
 export function useFormController() {
-  const { 
+  const router = useRouter();
+
+  const {
     selectedBrand,
+    selectedModel,
+    selectedYear,
     setSelectedBrand,
     setSelectedModel,
     setSelectedYear,
@@ -24,36 +31,70 @@ export function useFormController() {
   const [models, setModels] = useState<IProps[]>([]);
   const [yearByModel, setYearByModel] = useState<IProps[]>([]);
 
-  const handleChangeSelectedBrand = useCallback(async (brand: string) => {
-    setSelectedBrand(brand)
+  const handleChangeSelectedBrand = useCallback(
+    async (brand: string) => {
+      setSelectedBrand(brand);
+      setModels([]);
+      setYearByModel([]);
+      setSelectedModel("");
+      setSelectedYear("");
 
-    if(brand) {
-      const modelsResult = await BrandServices.getAllModels(brand)
-      setModels(modelsResult)
-    }
-  }, [setSelectedBrand, setModels]);
-  
-  const handleChangeSelectedModel = useCallback(async (model: string) => {
-    setSelectedModel(model)
+      if (brand) {
+        const modelsResult = await BrandServices.getAllModels(brand);
+        setModels(modelsResult);
+      }
+    },
+    [
+      setSelectedBrand,
+      setModels,
+      setYearByModel,
+      setSelectedModel,
+      setSelectedYear,
+    ]
+  );
 
-    if(model) {
-      const yearsResult = await BrandServices.getAllYears(selectedBrand, model)
-      setYearByModel(yearsResult) 
-    }
-  }, [setSelectedModel, selectedBrand]);
+  console.log({ selectedModel });
 
-  const handleChangeSelectedYear = useCallback((year: string) => {
-    setSelectedYear(year)
-  }, [setSelectedYear]);
+  const handleChangeSelectedModel = useCallback(
+    async (model: string) => {
+      setSelectedModel(model);
 
-  const disableAutocompleteModel = !selectedBrand && !!models;
+      if (model) {
+        const yearsResult = await BrandServices.getAllYears(
+          selectedBrand,
+          model
+        );
+        setYearByModel(yearsResult);
+      }
+    },
+    [setSelectedModel, selectedModel, selectedBrand]
+  );
+
+  const handleChangeSelectedYear = useCallback(
+    (year: string) => {
+      setSelectedYear(year);
+    },
+    [setSelectedYear]
+  );
+
+  const handleNavigationResult = useCallback(() => {
+    return router.push("/result", { scroll: false });
+  }, []);
+
+  const disableAutocompleteModel = !selectedBrand || !models;
+  const disableButton = !selectedBrand || !selectedModel || !selectedYear;
 
   return {
     models,
     yearByModel,
+    selectedYear,
+    selectedBrand,
+    disableButton,
+    selectedModel,
     disableAutocompleteModel,
+    handleNavigationResult,
     handleChangeSelectedBrand,
     handleChangeSelectedModel,
     handleChangeSelectedYear,
-  }
+  };
 }
