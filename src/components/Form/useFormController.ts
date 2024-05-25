@@ -53,8 +53,6 @@ export function useFormController() {
     ]
   );
 
-  console.log({ selectedModel });
-
   const handleChangeSelectedModel = useCallback(
     async (model: string) => {
       setSelectedModel(model);

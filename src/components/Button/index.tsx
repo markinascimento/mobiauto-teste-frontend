@@ -13,7 +13,7 @@ interface IButtonProps extends ButtonProps {
 
 export function Button({ label, ...props }: IButtonProps) {
   return (
-    <MU_Button {...props}>
+    <MU_Button data-testid="button-id" {...props}>
       <span> {label} </span>
     </MU_Button>
   );

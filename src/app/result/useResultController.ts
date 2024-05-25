@@ -1,4 +1,3 @@
-import { ResultDTO } from "@/dtos/ResultDTO";
 // -> ReactJS
 import { useEffect, useState } from "react";
 
@@ -10,6 +9,9 @@ import { useSearchPrice } from "@/hooks/useSearchPrice";
 
 // -> API
 import BrandServices from "@/services/BrandServices";
+
+// -> Types
+import { ResultDTO } from "@/dtos/ResultDTO";
 
 export function useResultController() {
   const router = useRouter();

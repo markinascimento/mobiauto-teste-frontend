@@ -26,6 +26,7 @@ export function Select({
     <MU_SelecteContainer>
       <MU_Label id={label}>{label}</MU_Label>
       <MU_Select
+        data-testid="select-id"
         id="demo-simple-select"
         disabled={isDisabled}
         labelId={label}
