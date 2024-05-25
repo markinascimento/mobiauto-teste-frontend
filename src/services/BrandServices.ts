@@ -1,6 +1,10 @@
-import { BrandDTO } from "@/dtos/BrandDTO";
+// -> Base API
 import { api } from "./httpClient";
+
+// -> Types
+import { BrandDTO } from "@/dtos/BrandDTO";
 import { ModelDTO } from "@/dtos/ModelDTO";
+import { ResultDTO } from "@/dtos/ResultDTO";
 
 /* eslint-disable import/no-anonymous-default-export */
 class BrandServices {
@@ -24,8 +28,10 @@ class BrandServices {
     });
   }
 
-  async getAllYears(brand: string, year: string) {
-    const { data } = await api.get<BrandDTO[]>(`/carros/marcas/${brand}/modelos/${year}/anos`);
+  async getAllYears(brand: string, model: string) {
+    const { data } = await api.get<BrandDTO[]>(
+      `/carros/marcas/${brand}/modelos/${model}/anos`
+    );
     return data.map((brand) => {
       return {
         label: brand.nome,
@@ -33,8 +39,13 @@ class BrandServices {
       };
     });
   }
+
+  async checkValue(brand: string, model: string, year: string) {
+    const { data } = await api.get<ResultDTO>(
+      `/carros/marcas/${brand}/modelos/${model}/anos/${year}`
+    );
+    return data;
+  }
 }
 
 export default new BrandServices();
-
-// https://parallelum.com.br/fipe/api/v1/carros/marcas/23/modelos/937/anos
