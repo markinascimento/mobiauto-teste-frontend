@@ -42,15 +42,15 @@ describe("<Select />", () => {
     expect(handleChange).not.toHaveBeenCalled();
   });
 
-  test("Should render values in the document", async () => {
-    const onChangeValueMock = jest.fn();
+  test("Should render values in the document", () => {
+    const handleSelectValue = jest.fn();
 
     render(
       <Select
         label="Select Label"
         value=""
         options={options}
-        onChangeValue={onChangeValueMock}
+        onChangeValue={handleSelectValue}
       />
     );
 

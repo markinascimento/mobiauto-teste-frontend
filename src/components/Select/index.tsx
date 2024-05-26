@@ -39,8 +39,8 @@ export function Select({
           onChangeValue("");
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option.code} value={option.code}>
+        {options.map((option, index) => (
+          <MenuItem key={index} value={option.code}>
             {option.label}
           </MenuItem>
         ))}
