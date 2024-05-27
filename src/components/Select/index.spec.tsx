@@ -31,7 +31,7 @@ describe("<Select />", () => {
       <Select
         value=""
         isDisabled
-        label="Testing"
+        label="Select label"
         onChangeValue={handleChange}
         options={options}
       />
@@ -51,6 +51,23 @@ describe("<Select />", () => {
         value=""
         options={options}
         onChangeValue={handleSelectValue}
+      />
+    );
+
+    fireEvent.mouseDown(screen.getByRole("combobox"));
+
+    expect(screen.getByText("value 1")).toBeInTheDocument();
+  });
+
+  test("Should select value 1 and render in the document", () => {
+    const handleChange = jest.fn();
+
+    render(
+      <Select
+        label="Select Label"
+        value=""
+        options={options}
+        onChangeValue={handleChange}
       />
     );
 

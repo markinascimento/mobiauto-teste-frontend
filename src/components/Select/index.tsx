@@ -40,7 +40,7 @@ export function Select({
         }}
       >
         {options.map((option, index) => (
-          <MenuItem key={index} value={option.code}>
+          <MenuItem data-testid="options" key={index} value={option.code}>
             {option.label}
           </MenuItem>
         ))}
